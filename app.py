@@ -206,8 +206,6 @@ def register():
             return apology("Password confirmation is required!")
         if password != confirmation:
             return apology("Passwords are not match!")
-        # if len(password) < 8:
-        #     print("Make sure your password is at lest 8 letters")
 
         hash = generate_password_hash(password)
 
