@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Symbol</th>
+            <th scope="col">Name</th>
+            <th scope="col">Shares</th>
+            <th scope="col">Price</th>
+            <th scope="col">TOTAL</th>
+            <th class="text-middle">Buy/Sell</th>
+          </tr>
+    </thead>
+    <tbody>
+        {% for row in database %}
+        <tr>
+            <td>{{ row["symbol"] }}</td>
+            <td>{{ row["name"] }}</td>
+            <td>{{ row["shares"] }}</td>
+            <td>{{ row["price"] }}</td>
+            <td>{{ row["total"] }}</td>
+            <td class="text-middle">
+                <input type="number" min="1" name="shares" placeholder="Shares" style="width:80px">
+                <input type="text" readonly name="symbol" value="{{ row['symbol'] }}" style="width:80px">
+                <button type="submit" name="action" value="buy" class="btn btn-primary button">Buy</button>
+                <button type="submit" name="action" value="sell" class="btn btn-primary button">Sell</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td class="border-0 fw-bold text-end" colspan="4">Cash Spent</td>
+            <td class="border-0 w-bold text-end">{{ total_spent }}</td>
+        </tr>
+        <tr>
+            <td class="border-0 fw-bold text-end" colspan="4">Balance</td>
+            <td class="border-0 w-bold text-end"> {{ cash }}</td>
+        </tr>
+    </tfoot>
+
+  </table>
+  <!-- <script>
+    document.querySelector("form");
+    addEventListener("submit", function() {
+        let value = getElementById("#symbol");
+        console.log(value);
+        alert(value);
+    });
+    </script> -->
+
+{% endblock %}
